@@ -1,4 +1,4 @@
-import useSWR from 'swr'
+import { toast } from 'react-toastify'
 
 import { Box, Button, CircularProgress, Container, Grid2 as Grid, Stack } from '@mui/material'
 
@@ -8,23 +8,18 @@ import { Icon } from '@components/Icon'
 
 import Background from '@assets/bckground-gibi.png'
 
-import { heroes } from '~/data/hero'
-import ListAllHeroes from '~/services/hero/List-all-heroes'
+import { useListHeroes } from '~/services/hero/List-all-heroes'
 
 export const Home = () => {
-	const { data, error, isLoading } = useSWR('heroes', ListAllHeroes.listHeroes, {
-		refreshInterval: 0
-	})
+	const { heroes, error, isLoading } = useListHeroes()
 
 	if (error) {
-		console.log(error)
+		toast.error('Erro ao carregar os heróis')
 	}
 
 	if (isLoading) {
 		return <CircularProgress />
 	}
-
-	console.log({ data, error, isLoading })
 
 	return (
 		<Box sx={{ width: '100%', height: '100%', minHeight: 'calc(100vh - 144px)' }}>
@@ -45,11 +40,12 @@ export const Home = () => {
 				</Stack>
 
 				<Grid container spacing={2} sx={{ my: 4 }}>
-					{heroes.map((hero) => (
-						<Grid size={2} key={hero.id}>
-							<CardHero data={hero} />
-						</Grid>
-					))}
+					{heroes &&
+						heroes.map((hero) => (
+							<Grid size={2} key={hero.id}>
+								<CardHero data={hero} />
+							</Grid>
+						))}
 				</Grid>
 			</Container>
 		</Box>

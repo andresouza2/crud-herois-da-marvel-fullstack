@@ -1,8 +1,17 @@
+import { AxiosResponse } from 'axios'
+import useSWR from 'swr'
+
 import axios from '~/config/apiConfig'
+import { IHero } from '~/models/hero-model'
 
-async function listHeroes() {
-	const response = await axios.get('/heroes')
-	return response.data
+export function useListHeroes() {
+	const { data, error, isLoading } = useSWR<AxiosResponse<IHero[]>>('/heroes', () => axios.get('/heroes'), {
+		refreshInterval: 0
+	})
+
+	return {
+		heroes: data?.data ?? [],
+		error,
+		isLoading
+	}
 }
-
-export default { listHeroes }

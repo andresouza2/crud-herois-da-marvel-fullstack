@@ -2,17 +2,13 @@ import { Link } from 'react-router-dom'
 
 import { CardContent, CardMedia, Card as CardMui, Typography } from '@mui/material'
 
+import { IHero } from '~/models/hero-model'
+
 import ImageTeste from '../../assets/imagem-card-teste.png'
 import pathRoute from '../../routes/path-route'
 
-interface Data {
-	id: number
-	title: string
-	imageUrl: string
-}
-
 interface Props {
-	data: Data
+	data: IHero
 }
 
 export const CardHero = ({ data }: Props) => {
@@ -40,7 +36,7 @@ export const CardHero = ({ data }: Props) => {
 					}
 				}}
 			>
-				<Typography sx={{ fontFamily: 'Bebas Neue', fontSize: '2rem', mb: 6 }}>{data.title}</Typography>
+				<Typography sx={{ fontFamily: 'Bebas Neue', fontSize: '2rem', mb: 6 }}>{data.name}</Typography>
 				<Link to={`${pathRoute.heroes}/${data.id}`}>Ver mais</Link>
 			</CardContent>
 		</CardMui>

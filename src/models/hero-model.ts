@@ -3,4 +3,5 @@ export interface IHero {
 	name: string
 	description: string
 	image: string
+	imageUrl: string
 }
