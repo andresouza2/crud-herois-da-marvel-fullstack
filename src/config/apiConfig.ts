@@ -1,0 +1,27 @@
+import Axios, { AxiosInstance } from 'axios'
+
+export function sleep(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms))
+}
+export class ApiError extends Error {}
+
+const axios: AxiosInstance = Axios.create({
+	baseURL: import.meta.env.VITE_BACKEND_URL
+})
+
+// refresh token
+axios.interceptors.response.use(
+	function (response) {
+		return response
+	},
+	async (error) => {
+		throw error.config
+	}
+)
+
+// Add a request interceptor
+axios.interceptors.request.use(async (config) => {
+	return config
+})
+
+export default axios
