@@ -1,4 +1,5 @@
 export default {
 	home: '/',
-	heroes: '/heroes'
+	heroes: '/heroes',
+	addHero: '/heroes/add'
 }
