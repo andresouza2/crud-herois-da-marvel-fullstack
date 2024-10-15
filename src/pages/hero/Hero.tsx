@@ -1,36 +1,43 @@
-import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { Box, Button, Container, Stack, Typography } from '@mui/material'
 
 import { Icon } from '@components/Icon'
 
-import Magneto from '@assets/imagem-card-teste.png'
-
-import { heroes } from '~/data/hero'
+import { Loading } from '~/components/Loading'
+import { deleteHeroById } from '~/services/hero/delete-hero-by-id'
+import { useGetHeroById } from '~/services/hero/find-hero-by-id'
 
 import { HeaderPage } from './HeaderPage'
 
 export const HeroPage = () => {
-	const [hero, setHero] = useState<{
-		id: number
-		title: string
-		image: string
-		imageUrl: string
-		desc: string
-	} | null>(null)
-
 	const { id } = useParams()
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		const response = heroes.find((hero) => hero.id === Number(id))
-		if (response) setHero(response)
-	}, [])
+	const { hero, errorHero, isLoadingHero } = useGetHeroById(id!)
 
+	async function handleDelete(valueId: string) {
+		try {
+			await deleteHeroById(valueId)
+			toast.success('Herói deletado com sucesso')
+		} catch (err) {
+			toast.error('Erro ao deletar herói')
+			return
+		}
+		navigate('/')
+	}
+
+	if (errorHero) {
+		toast.error(errorHero.response.message)
+	}
+
+	if (isLoadingHero) {
+		return <Loading />
+	}
 	return (
 		<Box sx={{ width: '100%', height: '100%', minHeight: 'calc(100vh - 144px)' }}>
-			<HeaderPage background={Magneto} />
+			<HeaderPage background={hero?.imageUrl} />
 
 			<Container maxWidth="md">
 				<Typography
@@ -38,11 +45,11 @@ export const HeroPage = () => {
 					color="text.secondary"
 					sx={{ fontSize: '75px', fontFamily: 'Bebas Neue', textAlign: 'center' }}
 				>
-					{hero?.title}
+					{hero?.name}
 				</Typography>
 
 				<Typography sx={{ mt: 4, textAlign: 'justify', color: (theme) => theme.palette.primary.main }}>
-					{hero?.desc}
+					{hero?.description}
 				</Typography>
 
 				<Stack direction={'row'} justifyContent={'center'} sx={{ mt: 4 }} spacing={2} alignItems={'center'}>
@@ -67,6 +74,7 @@ export const HeroPage = () => {
 							minWidth: 152,
 							background: '#E62429'
 						}}
+						onClick={() => handleDelete(id!)}
 					>
 						<Icon name="delete" />
 						Deletar

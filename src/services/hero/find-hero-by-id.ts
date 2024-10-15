@@ -1,16 +1,21 @@
+import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 
 import axios from '~/config/apiConfig'
+import { IHero } from '~/models/hero-model'
 
 export function useGetHeroById(id: string) {
 	const {
-		data: hero,
+		data,
 		error: errorHero,
 		isLoading: isLoadingHero
-	} = useSWR(`heroes/${id}`, () => axios.get(`heroes/${id}`))
+	} = useSWR<AxiosResponse<IHero>>(`heroesId`, () => axios.get(`heroes/${id}`), {
+		refreshInterval: 0,
+		revalidateOnFocus: false
+	})
 
 	return {
-		hero,
+		hero: data?.data,
 		errorHero,
 		isLoadingHero
 	}

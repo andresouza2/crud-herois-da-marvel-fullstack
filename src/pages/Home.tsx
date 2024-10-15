@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { Box, Button, CircularProgress, Container, Grid2 as Grid, Stack } from '@mui/material'
+import { Box, Button, Container, Grid2 as Grid, Stack } from '@mui/material'
 
 import { CardHero } from '@components/Card'
 import { HeaderPage } from '@components/HeaderPage'
@@ -8,6 +8,7 @@ import { Icon } from '@components/Icon'
 
 import Background from '@assets/bckground-gibi.png'
 
+import { Loading } from '~/components/Loading'
 import { useListHeroes } from '~/services/hero/List-all-heroes'
 
 export const Home = () => {
@@ -18,7 +19,7 @@ export const Home = () => {
 	}
 
 	if (isLoading) {
-		return <CircularProgress />
+		return <Loading />
 	}
 
 	return (
