@@ -47,6 +47,53 @@ const theme = createTheme({
 					}
 				}
 			}
+		},
+		MuiTextField: {
+			defaultProps: {
+				variant: 'outlined'
+			},
+			styleOverrides: {
+				root: {
+					color: 'primary.main',
+					'& .MuiOutlinedInput-root': {
+						'&.Mui-focused fieldset': {
+							borderColor: 'primary.main'
+						}
+					},
+					'& .MuiFormHelperText-root': {
+						color: 'primary.main'
+					},
+					'& .MuiInputLabel-root': {
+						color: 'primary.main'
+					},
+					'& .MuiInputBase-root': {
+						color: 'primary.main'
+					},
+					'& .MuiInputBase-input': {
+						color: 'primary.main',
+						borderColor: 'primary.main !important'
+					},
+					'& .MuiInputBase-input:hover': {
+						borderColor: 'primary.main !important'
+					},
+					'& .MuiInputBase-root.MuiOutlinedInput-root': {
+						color: 'primary.main'
+					},
+					'& .MuiInputBase-root.MuiOutlinedInput-root:hover': {
+						color: 'primary.main',
+						borderColor: 'primary.main !important'
+					},
+					'& .MuiInputBase-root.MuiOutlinedInput-root.Mui-focused': {
+						color: 'primary.main'
+					},
+					'& .MuiInputBase-root.MuiOutlinedInput-root.Mui-error': {
+						color: 'primary.main'
+					},
+					'& .MuiInputBase-root.MuiOutlinedInput-root.Mui-disabled': {
+						color: 'primary.main'
+					}
+				}
+			}
 		}
 	}
 })
