@@ -5,3 +5,9 @@ export interface IHero {
 	image: string
 	imageUrl: string
 }
+
+export interface IHeroForm {
+	name: string
+	description: string
+	image: FileList | undefined
+}
