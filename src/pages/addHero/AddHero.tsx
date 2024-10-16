@@ -2,6 +2,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useSWRConfig } from 'swr'
 import * as yup from 'yup'
 
 import { Box, Button, Container, Grid2 as Grid, Stack } from '@mui/material'
@@ -22,6 +23,7 @@ type FormHero = yup.InferType<typeof addHeroValidation>
 export const AddHero = () => {
 	const navigate = useNavigate()
 	const { state } = useLocation()
+	const { mutate } = useSWRConfig()
 
 	const methods = useForm<FormHero>({
 		resolver: yupResolver(addHeroValidation),
@@ -38,6 +40,7 @@ export const AddHero = () => {
 		} else {
 			addHero(data)
 		}
+		mutate(['/heroes', 'heroes/id'])
 		navigate(-1)
 	}
 

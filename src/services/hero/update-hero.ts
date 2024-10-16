@@ -14,6 +14,6 @@ export async function editHero({ id, data }: { id: string; data: any }) {
 			'Content-Type': 'multipart/form-data'
 		}
 	})
-	mutate(['/heroes', 'heroesId'])
+	mutate(['/heroes', '/heroes/id'])
 	return response
 }

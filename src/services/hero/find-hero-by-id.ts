@@ -9,7 +9,7 @@ export function useGetHeroById(id: string) {
 		data,
 		error: errorHero,
 		isLoading: isLoadingHero
-	} = useSWR<AxiosResponse<IHero>>(`heroesId`, () => axios.get(`heroes/${id}`), {
+	} = useSWR<AxiosResponse<IHero>>(`/heroes/id`, () => axios.get(`heroes/${id}`), {
 		refreshInterval: 0,
 		revalidateOnFocus: true,
 		revalidateOnMount: true
