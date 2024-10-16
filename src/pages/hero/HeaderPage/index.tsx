@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 
-import Logo from '../../../assets/logo.svg'
+import Logo from '@assets/logo.svg'
 
 interface Props {
 	background?: string

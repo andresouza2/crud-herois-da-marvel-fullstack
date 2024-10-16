@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface IHero {
 	id: string
 	name: string
@@ -9,5 +10,5 @@ export interface IHero {
 export interface IHeroForm {
 	name: string
 	description: string
-	image: FileList | undefined
+	image: any
 }

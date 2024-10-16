@@ -15,7 +15,7 @@ export const routers = createBrowserRouter(
 			<Route path="home" element={<Home />} />
 
 			<Route path={`${pathRoute.heroes}/:id`} element={<HeroPage />} />
-			<Route path={`${pathRoute.addHero}`} element={<AddHero />} />
+			<Route path={pathRoute.addHero} element={<AddHero />} />
 
 			<Route path="*" element={<Home />} />
 		</Route>

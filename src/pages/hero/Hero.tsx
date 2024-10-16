@@ -6,6 +6,7 @@ import { Box, Button, Container, Stack, Typography } from '@mui/material'
 import { Icon } from '@components/Icon'
 
 import { Loading } from '~/components/Loading'
+import pathRoute from '~/routes/path-route'
 import { deleteHeroById } from '~/services/hero/delete-hero-by-id'
 import { useGetHeroById } from '~/services/hero/find-hero-by-id'
 
@@ -86,6 +87,7 @@ export const HeroPage = () => {
 							minWidth: 152,
 							background: (theme) => theme.palette.text.secondary
 						}}
+						onClick={() => navigate(pathRoute.addHero, { state: { hero } })}
 					>
 						<Icon name="edit" />
 						Editar
