@@ -16,7 +16,6 @@ import { useListHeroes } from '~/services/hero/List-all-heroes'
 export const Home = () => {
 	const { heroes, error, isLoading } = useListHeroes()
 	const navigate = useNavigate()
-	console.log(import.meta.env.MODE)
 
 	if (error) {
 		toast.error('Erro ao carregar os heróis')
