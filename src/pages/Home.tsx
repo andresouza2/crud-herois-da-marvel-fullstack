@@ -46,7 +46,7 @@ export const Home = () => {
 
 				<Grid container spacing={2} sx={{ my: 4 }}>
 					{heroes?.map((hero) => (
-						<Grid size={2} key={hero.id}>
+						<Grid size={{ xs: 12, sm: 4, lg: 2 }} key={hero.id}>
 							<CardHero data={hero} />
 						</Grid>
 					))}

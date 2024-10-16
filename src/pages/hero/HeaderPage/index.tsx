@@ -11,7 +11,7 @@ export const HeaderPage = ({ background }: Props) => {
 		<Stack
 			sx={{
 				width: '100%',
-				height: '420px',
+				height: { xs: '150px', md: '420px' },
 				clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0% 100%)',
 				backgroundImage: `url(${background ?? Logo})`,
 				backgroundSize: { xs: 'cover', md: '80% auto' },

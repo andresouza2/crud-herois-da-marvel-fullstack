@@ -12,7 +12,7 @@ export const HeaderPage = ({ title, background }: Props) => {
 		<Stack
 			sx={{
 				width: '100%',
-				height: '420px',
+				height: { xs: '150px', md: '420px' },
 				clipPath: 'polygon(0 0, 100% 0, 100% 85%, 0% 100%)',
 				backgroundImage: `url(${background ?? Logo})`,
 				backgroundColor: (theme) => theme.palette.background.paper,
@@ -24,7 +24,11 @@ export const HeaderPage = ({ title, background }: Props) => {
 				justifyContent: 'center'
 			}}
 		>
-			<Typography variant="h1" color="text.secondary" sx={{ fontSize: '200px', fontFamily: 'Bebas Neue' }}>
+			<Typography
+				variant="h1"
+				color="text.secondary"
+				sx={{ fontSize: { xs: '64px', md: '200px' }, fontFamily: 'Bebas Neue' }}
+			>
 				{title ?? ''}
 			</Typography>
 		</Stack>
