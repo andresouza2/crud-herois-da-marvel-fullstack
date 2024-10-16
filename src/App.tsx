@@ -16,7 +16,8 @@ function App() {
 			value={{
 				refreshInterval: fiveMinutes,
 				revalidateOnFocus: true,
-				fetcher: (resource, init) => fetch(resource, init).then((res) => res.json())
+				fetcher: (resource, init) => fetch(resource, init).then((res) => res.json()),
+				provider: () => new Map()
 			}}
 		>
 			<ThemeProvider theme={lightTheme}>

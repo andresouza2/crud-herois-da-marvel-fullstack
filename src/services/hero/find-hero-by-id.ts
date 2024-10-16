@@ -11,8 +11,8 @@ export function useGetHeroById(id: string) {
 		isLoading: isLoadingHero
 	} = useSWR<AxiosResponse<IHero>>(`heroesId`, () => axios.get(`heroes/${id}`), {
 		refreshInterval: 0,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false
+		revalidateOnFocus: true,
+		revalidateOnMount: true
 	})
 
 	return {

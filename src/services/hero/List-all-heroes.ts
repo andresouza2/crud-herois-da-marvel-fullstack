@@ -6,7 +6,8 @@ import { IHero } from '~/models/hero-model'
 
 export function useListHeroes() {
 	const { data, error, isLoading, mutate } = useSWR<AxiosResponse<IHero[]>>('/heroes', () => axios.get('/heroes'), {
-		refreshInterval: 0
+		refreshInterval: 0,
+		revalidateOnFocus: true
 	})
 
 	return {
