@@ -6,7 +6,7 @@ export function sleep(ms: number) {
 export class ApiError extends Error {}
 
 const axios: AxiosInstance = Axios.create({
-	baseURL: 'https://heroes-api-chi.vercel.app'
+	baseURL: import.meta.env.VITE_BACKEND_URL
 })
 
 // refresh token
