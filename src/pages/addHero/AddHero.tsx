@@ -39,6 +39,7 @@ export const AddHero = () => {
 			try {
 				await editHero({ id: state?.hero.id ?? '', data })
 				mutateGlobal(`/heroes/${state?.hero.id}`, () => editHero({ id: state?.hero.id ?? '', data }))
+				mutateGlobal('/heroes')
 			} catch (err) {
 				console.log(err)
 			} finally {
