@@ -1,5 +1,6 @@
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useSWRConfig } from 'swr'
@@ -13,6 +14,7 @@ import Background from '@assets/bckground-gibi.png'
 
 import { InputFile } from '~/components/Inputs/InputFile'
 import { InputText } from '~/components/Inputs/InputText'
+import { useFetcherHero } from '~/hooks/hero/useFetcherHero'
 import { addHero } from '~/services/hero/add-hero'
 import { editHero } from '~/services/hero/update-hero'
 
@@ -23,6 +25,7 @@ type FormHero = yup.InferType<typeof addHeroValidation>
 export const AddHero = () => {
 	const navigate = useNavigate()
 	const { state } = useLocation()
+	const { mutate } = useFetcherHero()
 	const { mutate: mutateGlobal } = useSWRConfig()
 
 	const methods = useForm<FormHero>({
@@ -39,18 +42,18 @@ export const AddHero = () => {
 			try {
 				await editHero({ id: state?.hero.id ?? '', data })
 				mutateGlobal(`/heroes/${state?.hero.id}`, () => editHero({ id: state?.hero.id ?? '', data }))
-				mutateGlobal('/heroes')
+				mutate()
 			} catch (err) {
-				console.log(err)
+				toast.error('Erro ao editar herói')
 			} finally {
 				navigate(-1)
 			}
 		} else {
 			try {
 				await addHero(data)
-				mutateGlobal('/heroes')
+				mutate()
 			} catch (err) {
-				console.log(err)
+				toast.error('Erro ao adicionar herói')
 				return
 			} finally {
 				navigate(-1)

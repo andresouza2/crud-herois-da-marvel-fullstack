@@ -6,8 +6,8 @@ import { IHero } from '~/models/hero-model'
 export function useFetcherHero() {
 	const fetcher = async (url: string) => axios.get(url).then((res) => res.data)
 
-	const { data, error, isLoading } = useSWR<IHero[], Error>('/heroes', fetcher)
+	const { data, error, isLoading, mutate } = useSWR<IHero[], Error>('/heroes', fetcher)
 	console.log(data)
 
-	return { data: data, error, isLoading }
+	return { data: data, error, isLoading, mutate }
 }
