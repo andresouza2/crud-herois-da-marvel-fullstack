@@ -10,11 +10,13 @@ import { Icon } from '@components/Icon'
 import Background from '@assets/bckground-gibi.png'
 
 import { Loading } from '~/components/Loading'
+import { useFetcherHero } from '~/hooks/hero/useFetcherHero'
 import pathRoute from '~/routes/path-route'
-import { useListHeroes } from '~/services/hero/List-all-heroes'
+// import { useListHeroes } from '~/services/hero/List-all-heroes'
 
 export const Home = () => {
-	const { heroes, error, isLoading } = useListHeroes()
+	// const { heroes, error, isLoading } = useListHeroes()
+	const { data: heroes, error, isLoading } = useFetcherHero()
 	const navigate = useNavigate()
 
 	if (error) {

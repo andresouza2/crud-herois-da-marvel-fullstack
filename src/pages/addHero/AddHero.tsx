@@ -23,7 +23,7 @@ type FormHero = yup.InferType<typeof addHeroValidation>
 export const AddHero = () => {
 	const navigate = useNavigate()
 	const { state } = useLocation()
-	const { mutate } = useSWRConfig()
+	const { mutate: mutateGlobal } = useSWRConfig()
 
 	const methods = useForm<FormHero>({
 		resolver: yupResolver(addHeroValidation),
@@ -34,14 +34,27 @@ export const AddHero = () => {
 		}
 	})
 
-	const onSubmit: SubmitHandler<FormHero> = (data: FormHero) => {
+	const onSubmit: SubmitHandler<FormHero> = async (data: FormHero) => {
 		if (state?.hero) {
-			editHero({ id: state?.hero.id ?? '', data })
+			try {
+				await editHero({ id: state?.hero.id ?? '', data })
+				mutateGlobal(`/heroes/${state?.hero.id}`, () => editHero({ id: state?.hero.id ?? '', data }))
+			} catch (err) {
+				console.log(err)
+			} finally {
+				navigate(-1)
+			}
 		} else {
-			addHero(data)
+			try {
+				await addHero(data)
+				mutateGlobal('/heroes')
+			} catch (err) {
+				console.log(err)
+				return
+			} finally {
+				navigate(-1)
+			}
 		}
-		mutate(['/heroes', 'heroes/id'])
-		navigate(-1)
 	}
 
 	return (

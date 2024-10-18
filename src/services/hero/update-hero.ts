@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { mutate } from 'swr'
+// import { mutate } from 'swr'
 
 import axios from '~/config/apiConfig'
 
 export async function editHero({ id, data }: { id: string; data: any }) {
-	console.log('update: ', data)
 	const formData = new FormData()
 	formData.append('name', data.name)
 	formData.append('description', data.description)
@@ -14,6 +13,6 @@ export async function editHero({ id, data }: { id: string; data: any }) {
 			'Content-Type': 'multipart/form-data'
 		}
 	})
-	mutate(['/heroes', '/heroes/id'])
+	// mutate(['/heroes', '/heroes/id'])
 	return response
 }
